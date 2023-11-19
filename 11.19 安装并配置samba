@@ -1,0 +1,37 @@
+11.19
+安装并配置samba
+在基于 Debian 的系统上（例如 Ubuntu），安装和配置 Samba 的步骤如下：
+
+步骤 1：安装 Samba
+打开终端，并使用包管理器 apt 安装 Samba：
+sudo apt update
+sudo apt install samba
+
+步骤 2：配置 Samba
+(1)打开 Samba 主配置文件 /etc/samba/smb.conf 进行编辑：
+   sudo nano /etc/samba/smb.conf
+
+(2)在配置文件底部，你可以定义共享的目录和其他参数。以下是一个简单的示例，定义了一个名为 "share" 的共享目录：
+   [share]
+     path = /path/to/shared/folder
+     read only = no
+     guest ok = yes
+   path: 共享目录的路径。
+   read only: 设置为 no 表示允许写入。
+   guest ok: 设置为 yes 表示允许访客访问。
+(3)保存并关闭配置文件。
+   ctrl+o保存，再enter
+
+步骤 3：创建 Samba 用户
+在 Samba 中，你需要创建一个 Samba 用户，该用户在 Samba 共享中使用。使用以下命令创建用户：
+sudo smbpasswd -a username
+替换 username 为你想要创建的 Samba 用户名，然后输入密码。
+
+步骤 4：重启 Samba 服务
+在对 smb.conf 文件进行更改后，你需要重新启动 Samba 服务以使更改生效：
+sudo service smbd restart
+
+步骤 5：测试 Samba 共享
+你可以使用资源管理器在 Windows 计算机上访问该共享，或者在 Linux 计算机上使用命令行。例如，在 Linux 上使用 smbclient：
+smbclient //localhost/share -U username
+替换 share 为你的共享名称，username 为你在步骤 3 中创建的 Samba 用户。
