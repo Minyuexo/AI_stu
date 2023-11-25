@@ -1,5 +1,4 @@
-11.19
-安装并配置samba
+# 11.19安装并配置samba
 在基于 Debian 的系统上（例如 Ubuntu），安装和配置 Samba 的步骤如下：
 
 步骤 1：安装 Samba
